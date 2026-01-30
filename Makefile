@@ -2,7 +2,9 @@ CC=cc
 CFLAGS=-Wall -Wextra -Werror -I includes/
 SRCS_DIR=srcs/
 NAME=kview
-SOURCES=$(SRCS_DIR)kview.c		
+SOURCES=$(SRCS_DIR)kview.c				\
+		$(SRCS_DIR)image.c				\
+		$(SRCS_DIR)display/screen.c		\
 
 OBJ_DIR = .build/
 OBJS = $(SOURCES:$(SRCS_DIR)%.c=$(OBJ_DIR)%.o)
@@ -22,6 +24,7 @@ $(NAME): make_dir $(OBJS)
 
 make_dir:
 	@mkdir -p .build/
+	@mkdir -p .build/display
 
 $(OBJ_DIR)%.o: $(SRCS_DIR)%.c
 	$(CC) $(CFLAGS) $< -c -o $@
