@@ -10,8 +10,6 @@
 #include <stdint.h>
 #include <fcntl.h>
 
-#define WHITE_SPACE "\t\n\v\f\r \0"
-
 #include <stdio.h>
 
 static char	*get_next_data(const int fd, char *charset)
