@@ -1,4 +1,5 @@
 #include "screen.h"
+#include <stdint.h>
 
 static inline uint32_t	get_pixel_addr(const t_screen *screen, const uint32_t h, const uint32_t w)
 {
@@ -7,8 +8,9 @@ static inline uint32_t	get_pixel_addr(const t_screen *screen, const uint32_t h, 
 
 void	rectangle_display(const t_screen *screen, const uint32_t x, const uint32_t y, const uint32_t w, const uint32_t h, const uint32_t color)
 {
-	size_t	i;
-	size_t	j;
+	size_t		i;
+	size_t		j;
+	uint32_t	pixel_addr;
 
 	i = 0;
 	while (i < h)
@@ -16,7 +18,9 @@ void	rectangle_display(const t_screen *screen, const uint32_t x, const uint32_t 
 		j = 0;
 		while (j < w)
 		{
-			screen->display[get_pixel_addr(screen, x + j, y + i)] = color;
+			pixel_addr = get_pixel_addr(screen, x + j, y + i);
+			if (pixel_addr < screen->screen_size / sizeof(uint32_t))
+				screen->display[pixel_addr] = color;
 			j++;
 		}
 		i++;
